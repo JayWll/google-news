@@ -1,42 +1,44 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-console.log("hello world :o");
-
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+console.log('hello world :o');
 
 // define variables that reference elements on our page
-const dreamsList = document.getElementById("dreams");
-const dreamsForm = document.forms[0];
-const dreamInput = dreamsForm.elements["dream"];
+const articlesList = document.getElementById('articles');
+const searchForm = document.forms[0];
+const searchInput = searchForm.elements['q'];
+const loadingMessage = document.getElementById('loading');
 
-// a helper function that creates a list item for a given dream
-const appendNewDream = function(dream) {
-  const newListItem = document.createElement("li");
-  newListItem.innerHTML = dream;
-  dreamsList.appendChild(newListItem);
-};
+// retrieve and display articles
+const retrieveArticles = () => {
+  loadingMessage.textContent = 'Loading...';
+  articlesList.innerHTML = '';
 
-// iterate through every dream and add it to our page
-dreams.forEach(function(dream) {
-  appendNewDream(dream);
-});
+  fetch('/news?q=' + encodeURIComponent(searchInput.value)).then((response) => {
+    response.json().then((data) => {
+      if (data.error) {
+        leadingMessage.textContent = data.error
+      } else {
+        loadingMessage.textContent = '';
+        console.log(data);
 
-// listen for the form to be submitted and add a new dream when it is
-dreamsForm.onsubmit = function(event) {
+        data.items.forEach((item) => {
+          console.log(item);
+          const newArticle = document.createElement('li');
+          newArticle.innerHTML = '<a href="' + item.url + '" target="_blank">' + item.title + '</a>';
+          articlesList.appendChild(newArticle)
+        })
+      }
+    })
+  })
+}
+
+// listen for the form to be submitted and trigger the function above when it is
+searchForm.onsubmit = (e) => {
   // stop our form submission from refreshing the page
-  event.preventDefault();
+  e.preventDefault();
+  retrieveArticles();
+}
 
-  // get dream value and add it to the list
-  dreams.push(dreamInput.value);
-  appendNewDream(dreamInput.value);
-
-  // reset form
-  dreamInput.value = "";
-  dreamInput.focus();
-};
+// retrieve articles when the page loads
+retrieveArticles();
