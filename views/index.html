@@ -26,22 +26,23 @@
   <body>
     <header>
       <h1>
-        A Dream of the Future
+        What's Going On?
       </h1>
     </header>
 
     <main>
       <p class="bold">Oh hi,</p>
 
-      <p>Tell me your hopes and dreams:</p>
+      <p>Tell me what you'd like to learn about:</p>
 
       <form>
-        <input name="dream" type="text" maxlength="100" placeholder="Dreams!" aria-labelledby="submit-dream">
-        <button type="submit" id="submit-dream">Submit Dream</button>
+        <input name="q" type="text" maxlength="100" value="NodeJS Development" aria-labelledby="submit-dream">
+        <button type="submit" id="search">Search</button>
       </form>
 
       <section class="dreams">
-        <ul id="dreams"></ul>
+        <p id="loading">Loading...</p>
+        <ul id="articles"></ul>
       </section>
     </main>
 
