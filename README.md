@@ -8,20 +8,22 @@ Click `Show` in the header to see your app live. Updates to your code will insta
 Find out more [about Glitch](https://glitch.com/about).
 
 
-Your Project
+This Project
 ------------
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+I wanted to be able to display news items based on a search, and it turns out Google provides News search results in RSS format. This project is a building block, intended to be [remixed](https://glitch.com/edit/#!/remix/google-news).
 
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+Most of the magic happens in `utils/googlenews.js`. It provides a single function that, based on the search term provided,  retrieves the RSS feed, converts it JSON, and does some other little bits of tidying up to better (IMHO) structure the data.
 
 
-Made by [Glitch](https://glitch.com/)
+Usage
+-----
+
+`const googlenews = require('.utils/googlenews')
+googlenews('Search Term', callback(error, data))`
+
+
+
 -------------------
 
 \ ゜o゜)ノ
