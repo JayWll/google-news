@@ -3,7 +3,7 @@
 
 // init project
 const express = require('express');
-const feed = require('rss-to-json')
+const googlenews = require('./utils/googlenews');
 const app = express();
 
 // we've started you off with Express,
@@ -22,14 +22,9 @@ app.get('/news', (req, res) => {
     return res.send({error: 'You must provide a search term.'})
   }
 
-  const url = 'https://news.google.com/rss/search?q=' + req.query.q
-
-  feed.load(url, (err, rss) => {
-    if (err) {
-      return res.send({error: 'Unable to fetch news articles.'})
-    }
-
-    res.send(rss)
+  googlenews(req.query.q, (error, data) => {
+    if (error) return res.send({error: error})
+    else res.send(data)
   })
 });
 

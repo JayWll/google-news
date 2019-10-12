@@ -25,7 +25,7 @@ const retrieveArticles = () => {
         data.items.forEach((item) => {
           console.log(item);
           const newArticle = document.createElement('li');
-          newArticle.innerHTML = '<a href="' + item.url + '" target="_blank">' + item.title + '</a>';
+          newArticle.innerHTML = '<a href="' + item.url + '" target="_blank">' + item.title + '</a> - ' + item.source;
           articlesList.appendChild(newArticle)
         })
       }
