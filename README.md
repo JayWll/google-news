@@ -19,9 +19,10 @@ Most of the magic happens in `utils/googlenews.js`. It provides a single functio
 Usage
 -----
 
-`const googlenews = require('.utils/googlenews')
-googlenews('Search Term', callback(error, data))`
-
+````
+const googlenews = require('.utils/googlenews')
+googlenews('Search Term', callback(error, data))
+````
 
 
 -------------------
