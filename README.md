@@ -21,7 +21,7 @@ Usage
 
 ````
 const googlenews = require('.utils/googlenews')
-googlenews('Search Term', callback(error, data))
+googlenews('Search Term', callback(error, data), [limit])
 ````
 
 
